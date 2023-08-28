@@ -96,13 +96,13 @@ class DescriptionTemplate
     end
 
     def current_api_path
-        "projects/gl-retrospectives%2F#{team.project}/issues/#{current_retrospective&.fetch('iid') || -1}"
+        "projects/in-retrospectives%2F#{team.project}/issues/#{current_retrospective&.fetch('iid') || -1}"
     end
 
     def current_retrospectives_api_path(extra_labels = [])
         labels = ['retrospective'].concat(extra_labels)
 
-        "projects/gl-retrospectives%2F#{team.project}/issues?labels=#{labels.join(',')}&state=opened&search=#{release['title']}"
+        "projects/in-retrospectives%2F#{team.project}/issues?labels=#{labels.join(',')}&state=opened&search=#{release['title']}"
     end
 
     def deliverables
@@ -127,7 +127,7 @@ class DescriptionTemplate
     
     def follow_up
         @follow_up ||=
-            api_client.get("projects/gl-retrospectives%2F#{team.project}/issues?labels=follow-up&state=opened", auth: true)
+            api_client.get("projects/in-retrospectives%2F#{team.project}/issues?labels=follow-up&state=opened", auth: true)
     end
     
     def unplanned
